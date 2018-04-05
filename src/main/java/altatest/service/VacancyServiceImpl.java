@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service("vacancyServiceImpl")
@@ -24,7 +25,9 @@ public class VacancyServiceImpl implements VacancyService {
 	 */
 	public List<Vacancy> getVacancyList() {
 
-		return vacancyRepository.findAll();
+		List<Vacancy> list = vacancyRepository.findAll();
+		list.sort(Comparator.comparing(Vacancy::getName));
+		return list;
 		//return vacancyList;
 	}
 
@@ -35,7 +38,11 @@ public class VacancyServiceImpl implements VacancyService {
 	 * @return выдает Vacancy по идентификатору
 	 */
 	public Vacancy get(Long id) {
-		return vacancyRepository.getOne(id);
+		Optional<Vacancy> opcional =  vacancyRepository.findById(id);
+		if (opcional != null && opcional.isPresent()){
+			return opcional.get();
+		}
+		return null;
 	}
 
 	/**
