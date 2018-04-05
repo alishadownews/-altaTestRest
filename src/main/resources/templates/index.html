@@ -1,0 +1,93 @@
+<!doctype html>
+<html ng-app="vacancyApp">
+<head>
+<meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!--	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="index.js"></script>
+</head>
+<body ng-controller="vacancyController">
+	<script src="index.js"></script>
+
+
+
+    <div class="page-header">
+        <h1> Список вакансий </h1>
+    </div>
+    <div class="panel">
+       	<div class="form-inline" >
+			<div class="form-group-hiden" hidden="false" >
+				<div class="col-md-id">
+					<input class="form-control" ng-model="editVacancy.id" 	placeholder = "Номер" />
+			   	</div>
+		   	</div>
+		   	<div class="form-group">
+			   	<div class="col-md-name">
+				   	<input class="form-control" ng-model="editVacancy.name" 	placeholder = "Наименование"  />
+			   	</div>
+		   	</div>
+		   	<div class="form-group">
+				<div class="col-md-salary">
+					<input class="form-control" ng-model="editVacancy.salary" 	placeholder = "Уровень зарплаты" />
+				</div>
+		   	</div>
+			<div class="form-group">
+				<div class="col-md-requiredWorkExperience">
+					<input class="form-control" ng-model="editVacancy.requiredWorkExperience" 	placeholder = "Требуемый опыт работы"  />
+				</div>
+			</div>
+            <div class="form-group">
+                <div class="col-md-city">
+                    <input class="form-control" ng-model="editVacancy.city" 	placeholder = "Город"  />
+                </div>
+            </div>
+			<div class="form-group" ng-show="!editMode">
+				<div class="col-md-btnAdd">
+					<button class="btn btn-default" ng-click="addItem()">Добавить</button>
+				</div>
+			</div>
+			<div class="form-group" ng-show="editMode" >
+				<div class="col-md-btnUpdateEdit">
+					<button class="btn btn-default"  ng-click="updateItem()">Отредактировать</button>
+				</div>
+			</div>
+			<div class="form-group" ng-show="editMode" >
+				<div class="col-md-btnUpdateEdit">
+					<button class="btn btn-default"  ng-click="updateModeOff()">Отмена редактирования</button>
+				</div>
+			</div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+					<th>Номер</th>
+					<th>Наименование</th>
+					<th>Уровень зарплаты</th>
+                    <th>Требуемый опыт работы</th>
+					<th>Город</th>
+					<th>Изменить</th>
+					<th>Удалить</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list.items">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.salary}}</td>
+					<td>{{item.requiredWorkExperience}}</td>
+					<td>{{item.city}}</td>
+					<td><button class="btn btn-default" ng-click="updateModeOn(item.id)">Изменить</button></td>
+					<td><button class="btn btn-default" ng-click="deleteItem(item.id)">Удалить</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</body>
+</html>
